@@ -1,0 +1,97 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "firstname": "John",
+            "lastname": "Doe",
+            "email": "john.doe@example.com",
+            "password": "scrypt:32768:8:1$dZ1pXoF3vuMZwbGz$dde967919a4083b568d7c5501c7c5c3eb5be12ed892884e848afc0e03815182b66b7119259efee5680935de2486e070fd2c9d34da2e581d96f15a40ded0f792e",
+            "role": "admin",
+            "created_at": 1764199591
+        }
+    ],
+    "categories": [
+        {
+            "id": 2,
+            "name": "Jeux d'Action",
+            "slug": "jeux-d'action"
+        },
+        {
+            "id": 3,
+            "name": "Jeux de Sport",
+            "slug": "jeux-de-sport"
+        },
+        {
+            "id": 4,
+            "name": "Jeux de Stratégie",
+            "slug": "jeux-de-stratégie"
+        }
+    ],
+    "catalogue": [
+        {
+            "id": 1,
+            "title": "Call of Duty: Modern Warfare",
+            "description": "Jeu de tir à la première personne avec campagne et mode multijoueur.",
+            "price": 59.99,
+            "category_id": 2,
+            "stock": 50,
+            "likes": 1,
+            "views": 0,
+            "created_at": 1764200668,
+            "images": [
+                "cod_mw_cover.jpg",
+                "cod_mw_screenshot1.jpg"
+            ]
+        }
+    ],
+    "comments": [
+        {
+            "id": 1,
+            "product_id": 1,
+            "user_id": 1,
+            "content": "Super jeu, très immersif !",
+            "rating": 5,
+            "created_at": 1764201141
+        },
+        {
+            "id": 2,
+            "product_id": 1,
+            "user_id": 1,
+            "content": "Super jeu, très immersif !",
+            "rating": 5,
+            "created_at": 1764201147
+        }
+    ],
+    "likes": [
+        {
+            "user_id": 1,
+            "product_id": 1,
+            "created_at": 1764200990
+        }
+    ],
+    "orders": [],
+    "stats": {
+        "best_sellers": [],
+        "new_arrivals": [
+            1
+        ],
+        "featured": []
+    },
+    "sessions": [
+        {
+            "token": "a14dfb97003b9eb4be135b4d6fd7188c9b38107c975a3e6b3e8fd80357de5801",
+            "user_id": 1,
+            "expires": 1764804391
+        },
+        {
+            "token": "1c81d714ff5242b62b5393e07bf850dde3329d001b38c08a2f41aea0ee924318",
+            "user_id": 1,
+            "expires": 1764804468
+        },
+        {
+            "token": "230c19c4c13ed51152b8a9b508834364f7d653e4edfc68acb8086aac8b311441",
+            "user_id": 1,
+            "expires": 1764805477
+        }
+    ]
+}
