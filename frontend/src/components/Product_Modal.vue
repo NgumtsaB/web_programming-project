@@ -7,7 +7,21 @@
 
       <!-- Affichage détaillé du produit -->
       <h1>{{ product.title }}</h1>
-      <img :src="product.images[0]" alt="product image" style="width:100%; max-height:300px; object-fit:cover; margin-bottom:20px;">
+      <img 
+        v-if="Array.isArray(product.images) && product.images.length" 
+        :src="product.images[0]" 
+        alt="product image" 
+        style="width:100%; max-height:300px; object-fit:cover; margin-bottom:20px;"
+      >
+      <img 
+        v-else-if="typeof product.images === 'string'" 
+        :src="product.images" 
+        alt="product image" 
+        style="width:100%; max-height:300px; object-fit:cover; margin-bottom:20px;"
+      >
+      <div v-else style="height: 200px; background: #eee; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+        No Image Available
+      </div>
       <p><strong>Price:</strong> ${{ product.price.toFixed(2) }}</p>
       <p><strong>Description:</strong> {{ product.description }}</p>
       <p><strong>Category ID:</strong> {{ product.category_id }}</p>
