@@ -39,19 +39,19 @@ defineEmits(['add-to-cart']);
 
 <style scoped>
 .game-card {
-  background: #1e1e24; /* Darker card background */
+  background: white; /* Light card background */
   border-radius: 16px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid #e2e8f0; /* Light border */
   display: flex;
   flex-direction: column;
 }
 
 .game-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(59, 130, 246, 0.4);
-  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 15px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
 }
 
 .image-container {
@@ -59,6 +59,7 @@ defineEmits(['add-to-cart']);
   width: 100%;
   padding-top: 56.25%; /* 16:9 Aspect Ratio */
   overflow: hidden;
+  background-color: #f1f5f9; /* Placeholder bg */
 }
 
 .game-image {
@@ -78,7 +79,7 @@ defineEmits(['add-to-cart']);
 .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,16 +121,16 @@ defineEmits(['add-to-cart']);
 
 .tag {
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: #64748b; /* Muted text */
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .game-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #e2e8f0;
+  color: #1e293b; /* Dark text */
   margin: 0;
   line-height: 1.3;
 }
@@ -146,7 +147,6 @@ defineEmits(['add-to-cart']);
   font-size: 1.1rem;
   font-weight: 700;
   color: #3b82f6; /* Blue accent */
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
 }
 
 .add-cart-btn {
@@ -165,6 +165,6 @@ defineEmits(['add-to-cart']);
 
 .add-cart-btn:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 </style>
