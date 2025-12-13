@@ -48,20 +48,49 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import GameCard from '../components/GameCard.vue';
+import api from '../services/api.js';
 
-const games = ref([
-  { id: 1, name: "CyberQuest 2077", genre: "Action RPG", price: 59.99, image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600" },
-  { id: 2, name: "Mystic Legends", genre: "Adventure", price: 44.50, image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=600" },
-  { id: 3, name: "Turbo Racer X", genre: "Racing", price: 29.99, image: "https://images.unsplash.com/photo-1511882150382-421056ac8ba7?auto=format&fit=crop&q=80&w=600" },
-  { id: 4, name: "Space Odyssey", genre: "Sci-Fi Sim", price: 39.99, image: "https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?auto=format&fit=crop&q=80&w=600" },
-]);
+const router = useRouter();
+const games = ref([]);
+const categories = ref([]);
+
+const fetchGames = async () => {
+  try {
+    const [productsRes, categoriesRes] = await Promise.all([
+      api.get('/products'),
+      api.get('/categories')
+    ]);
+    
+    categories.value = categoriesRes.data;
+    const categoryMap = new Map(categories.value.map(c => [c.id, c.name]));
+
+    games.value = productsRes.data.map(product => ({
+      id: product.id,
+      name: product.title,
+      genre: categoryMap.get(product.category_id) || 'Unknown',
+      price: product.price,
+      // Handle images: if array, take first; if string, use it; else placeholder
+      image: Array.isArray(product.images) && product.images.length > 0 
+        ? product.images[0] 
+        : (typeof product.images === 'string' ? product.images : 'https://via.placeholder.com/300x200'),
+      description: product.description
+    }));
+  } catch (error) {
+    console.error("Failed to fetch games:", error);
+  }
+};
 
 const addToCart = (id) => {
   console.log('Added to cart:', id);
   // Ideally call a cart store/service here
 };
+
+onMounted(() => {
+  fetchGames();
+});
 </script>
 
 <style scoped>
