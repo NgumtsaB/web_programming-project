@@ -49,6 +49,7 @@
           :price="game.price"
           :image="game.image"
           @add-to-cart="addToCart"
+          @view-details="openModal"
         />
       </div>
     </section>
@@ -80,6 +81,7 @@
           :price="game.price"
           :image="game.image"
           @add-to-cart="addToCart"
+          @view-details="openModal"
         />
       </div>
     </section>
@@ -90,12 +92,18 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import GameCard from '../components/GameCard.vue';
+import Product_Modal from '../components/Product_Modal.vue';
 import api from '../services/api.js';
+import cartService from '../services/CartService.js';
 
 const router = useRouter();
 const games = ref([]);
 const newArrivals = ref([]);
 const categories = ref([]);
+
+// Modal State
+const modalVisible = ref(false);
+const selectedProduct = ref(null);
 
 const fetchGames = async () => {
   try {
@@ -109,9 +117,12 @@ const fetchGames = async () => {
 
     const allGames = productsRes.data.map(product => ({
       id: product.id,
+      title: product.title, 
       name: product.title,
+      category_id: product.category_id,
       genre: categoryMap.get(product.category_id) || 'Unknown',
       price: product.price,
+      images: product.images, 
       image: Array.isArray(product.images) && product.images.length > 0 
         ? product.images[0] 
         : (typeof product.images === 'string' ? product.images : 'https://via.placeholder.com/300x200'),
@@ -120,14 +131,35 @@ const fetchGames = async () => {
     }));
 
     games.value = allGames.slice(0, 4);
-    newArrivals.value = allGames.slice(0, 4).reverse(); // Just simulation for now
+    newArrivals.value = allGames.slice(0, 4).reverse();
   } catch (error) {
     console.error("Failed to fetch games:", error);
   }
 };
 
 const addToCart = (id) => {
-  console.log('Added to cart:', id);
+  const product = [...games.value, ...newArrivals.value].find(g => g.id === id);
+  if (product) {
+    cartService.addToCart(product);
+    console.log('Added to cart:', product.name);
+  }
+};
+
+const openModal = async (id) => {
+  try {
+    const res = await api.get(`/products/${id}`);
+    selectedProduct.value = res.data;
+    modalVisible.value = true;
+    document.body.style.overflow = 'hidden';
+  } catch (error) {
+    console.error("Error loading product details:", error);
+  }
+};
+
+const closeModal = () => {
+  modalVisible.value = false;
+  selectedProduct.value = null;
+  document.body.style.overflow = 'auto';
 };
 
 onMounted(() => {

@@ -3,7 +3,7 @@
     <div class="image-container">
       <img :src="image" :alt="name" class="game-image" />
       <div class="overlay">
-        <button class="view-btn">Details</button>
+        <button class="view-btn" @click="$emit('view-details', id)">Details</button>
       </div>
     </div>
     <div class="card-content">
@@ -11,7 +11,7 @@
       <h3 class="game-title">{{ name }}</h3>
       <div class="price-row">
         <span class="price">{{ formattedPrice }}</span>
-        <button class="add-cart-btn" @click="$emit('add-to-cart', id)">
+        <button class="add-cart-btn" @click.stop="$emit('add-to-cart', id)">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
         </button>
       </div>
@@ -34,7 +34,7 @@ const formattedPrice = computed(() => {
   return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(props.price);
 });
 
-defineEmits(['add-to-cart']);
+defineEmits(['add-to-cart', 'view-details']);
 </script>
 
 <style scoped>
