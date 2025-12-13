@@ -1,7 +1,6 @@
 <template>
   <div class="main-container">
-    <!-- Header -->
-    <Header />   
+    <!-- Header removed (global in App.vue) -->
   <div class="page-container">
     <!-- Products grid - DOIT ÊTRE AVANT la sidebar pour le flux naturel -->
     <div class="products-grid">
@@ -224,6 +223,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 .filters-sidebar::-webkit-scrollbar {
@@ -334,8 +334,8 @@ input[type="number"] {
 import { ref, computed, onMounted } from "vue";
 import Product_Modal from "../components/Product_Modal.vue";
 import ProductService from "../services/services/ProductService.js";
-import Header from "../components/Header.vue";
-import cartService from "../services/cartService.js";
+// import Header from "../components/Header.vue"; // Global now
+import cartService from "../services/CartService.js";
 import axios from "axios";
 
 function addToCart(product) {

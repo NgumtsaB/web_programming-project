@@ -4,7 +4,7 @@
       <!-- Logo -->
       <div class="logo-section">
         <router-link to="/" class="logo-link">
-          <h1 class="logo">ShopVue</h1>
+          <h1 class="logo">GameZone</h1>
         </router-link>
       </div>
 
@@ -58,7 +58,7 @@
 
 <script setup>
 import { computed } from "vue";
-import cartService from "../services/cartService.js";
+import cartService from "../services/CartService.js";
 
 // utilise getCartRef() pour récupérer le ref réactif
 const cartCount = computed(() => {
