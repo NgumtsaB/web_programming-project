@@ -1,0 +1,168 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstname": "Malick",
+      "lastname": "Wane",
+      "email": "malick@example.com",
+      "password": "$2b$10$aqCSdYJPZJHEMcEvcdaC/.RI1nMEDFuanpVOo.jv39YLQcn6q1X7i",
+      "role": "admin",
+      "created_at": "2025-11-28T13:26:16.867Z"
+    },
+    {
+      "id": 2,
+      "firstname": "Cynthia",
+      "lastname": "ngutsum",
+      "email": "cynthia@example.com",
+      "password": "$2b$10$DGRdA7AWg628hbjTPYjvbeJu.HuxadqCF7jUFcOOMYROSP9vCOf32",
+      "role": "user",
+      "created_at": "2025-11-28T13:38:26.219Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Jeux d'Action",
+      "slug": "jeux-d-action"
+    },
+    {
+      "id": 2,
+      "name": "Jeux Course",
+      "slug": "jeux-course"
+    }
+  ],
+  "catalogue": [
+    {
+      "id": 1,
+      "title": "Call of Duty: Modern Warfare",
+      "description": "FPS intense avec mode solo et multi.",
+      "price": 39.99,
+      "category_id": 1,
+      "stock": 48,
+      "likes": 0,
+      "views": 0,
+      "created_at": 1764773252277,
+      "images": [
+        "https://imgs.search.brave.com/zvvM8NB5Z6KjasXHy708WNIe5qhQdQk30A-uEWy8Cr4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/bHVkdW0uZnIvbW9k/dWxlcy9waF9zaW1w/bGVibG9nL2NvdmVy/cy8xMzg0LXRodW1i/LmpwZWc",
+        "https://imgs.search.brave.com/zvvM8NB5Z6KjasXHy708WNIe5qhQdQk30A-uEWy8Cr4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/bHVkdW0uZnIvbW9k/dWxlcy9waF9zaW1w/bGVibG9nL2NvdmVy/cy8xMzg0LXRodW1i/LmpwZWc"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Call of Duty: Modern Warfare",
+      "description": "FPS intense avec mode solo et multi.",
+      "price": 59.99,
+      "category_id": 1,
+      "stock": 50,
+      "likes": 0,
+      "views": 0,
+      "created_at": 1765372202599,
+      "images": [
+        "cod_cover.jpg",
+        "cod_screen.jpg"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Forza Horizon 5",
+      "description": "Jeu de course en monde ouvert au Mexique.",
+      "price": 49.99,
+      "category_id": 2,
+      "stock": 30,
+      "likes": 0,
+      "views": 0,
+      "created_at": 1765472202599,
+      "images": [
+        "forza_cover.jpg",
+        "forza_screen.jpg"
+      ]
+    }
+  ],
+  "comments": [],
+  "likes": [],
+  "orders": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "status": "shipped",
+      "items": [
+        {
+          "product_id": 1,
+          "quantity": 2
+        }
+      ],
+      "total": 119.98,
+      "address": {
+        "city": "Paris",
+        "street": "Rue 17",
+        "zip": "75000"
+      },
+      "created_at": 1764773576
+    }
+  ],
+  "sessions": [
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYWxpY2tAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQzMzYzODQsImV4cCI6MTc2NDk0MTE4NH0.9WdgrDtxxiDFRRZ9lHmb7cFKvzb1PjvtqvfGXCm2lC0",
+      "user_id": 1,
+      "expires": 1764941184784
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYWxpY2tAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQzMzY0MDAsImV4cCI6MTc2NDk0MTIwMH0.UPFqldYLA0WzGWOVISa58yrKuMQZ8XHfRNmnZ4_2ujA",
+      "user_id": 1,
+      "expires": 1764941200783
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYWxpY2tAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQzMzY0MzgsImV4cCI6MTc2NDk0MTIzOH0.68rCJg4-hIO4_zxHQiEmX0xFtTdyL5koV2LmYrAGf0Q",
+      "user_id": 1,
+      "expires": 1764941238353
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJtYWxpY2tAZXhhbXBsZS5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NjQzMzY4MDYsImV4cCI6MTc2NDk0MTYwNn0.1vsl_jGarC7UrO7CBZL8LBxLGwIBXDmLqDxK4uhBw_M",
+      "user_id": 1,
+      "expires": 1764941606187
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjeW50aGlhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjQzMzcxMjAsImV4cCI6MTc2NDk0MTkyMH0.1SHEJN8aUwZnHpxEDIgktDiF78OPC7mIKLotka6FUwE",
+      "user_id": 2,
+      "expires": 1764941920128
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjeW50aGlhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjQ3NzM0MjcsImV4cCI6MTc2NTM3ODIyN30.HclGuNmI4q3U33X72QRnCWdkL2bvFfl7LaCbGpCtn60",
+      "user_id": 2,
+      "expires": 1765378227890
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjeW50aGlhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjQ5NjU0MzUsImV4cCI6MTc2NTU3MDIzNX0.RQqJdnW8R0JeAJtPUy75WtB3w7VihtxY4Dq6q2ZlrGY",
+      "user_id": 2,
+      "expires": 1765570235767
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjeW50aGlhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjQ5NjU3MDAsImV4cCI6MTc2NTU3MDUwMH0.Dq2oP6StrU9qNbhG-9d3EHKezGisF_K-OYV3AV88foo",
+      "user_id": 2,
+      "expires": 1765570500393
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjeW50aGlhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjQ5Njc5OTEsImV4cCI6MTc2NTU3Mjc5MX0.F3GeMaxdblloAfmwpCUItKI1ZZE-LpkH6PnxeXQuZmw",
+      "user_id": 2,
+      "expires": 1765572791250
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjeW50aGlhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjQ5NjgwNDAsImV4cCI6MTc2NTU3Mjg0MH0.ijN6YG8pfuVv_5CXakTIR2IHXrohK76SDDNuZ3YYsAk",
+      "user_id": 2,
+      "expires": 1765572840956
+    },
+    {
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJjeW50aGlhQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NjUzNzIxNDUsImV4cCI6MTc2NTk3Njk0NX0.cLiAm_F7wg3g8FIlI_avnedpFFH8CbY_Ongj_xRXxTQ",
+      "user_id": 2,
+      "expires": 1765976945138
+    }
+  ],
+  "stats": {
+    "best_sellers": [
+      1,
+      1
+    ],
+    "new_arrivals": [],
+    "featured": []
+  }
+}
