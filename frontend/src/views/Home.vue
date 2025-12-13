@@ -145,14 +145,20 @@ const addToCart = (id) => {
   }
 };
 
-const openModal = async (id) => {
-  try {
-    const res = await api.get(`/products/${id}`);
-    selectedProduct.value = res.data;
+const openModal = (id) => {
+  const game = [...games.value, ...newArrivals.value].find(g => g.id === id);
+  if (game) {
+    // Adapt structure for Modal if necessary
+    selectedProduct.value = {
+      ...game,
+      title: game.name,
+      images: game.image, // GameCard has 'image', Modal helps handle string vs array
+      description: game.description || 'No description available.'
+    };
     modalVisible.value = true;
     document.body.style.overflow = 'hidden';
-  } catch (error) {
-    console.error("Error loading product details:", error);
+  } else {
+    console.error("Game not found for modal:", id);
   }
 };
 
