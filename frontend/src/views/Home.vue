@@ -146,7 +146,10 @@ const addToCart = (id) => {
 };
 
 const openModal = (id) => {
+  console.log("Attempting to open modal for ID:", id);
   const game = [...games.value, ...newArrivals.value].find(g => g.id === id);
+  console.log("Found game:", game);
+
   if (game) {
     // Adapt structure for Modal if necessary
     selectedProduct.value = {
@@ -155,6 +158,7 @@ const openModal = (id) => {
       images: game.image, // GameCard has 'image', Modal helps handle string vs array
       description: game.description || 'No description available.'
     };
+    console.log("Setting selected product:", selectedProduct.value);
     modalVisible.value = true;
     document.body.style.overflow = 'hidden';
   } else {
