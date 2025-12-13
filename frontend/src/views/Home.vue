@@ -6,11 +6,51 @@
         <h1 class="hero-title">Level Up Your <span class="highlight">Experience</span></h1>
         <p class="hero-subtitle">Discover the latest releases and exclusive deals on the best titles.</p>
         <div class="hero-buttons">
-          <button class="primary-btn">Shop Now</button>
-          <button class="secondary-btn">View Offers</button>
+          <button class="primary-btn" @click="router.push('/products')">Shop Now</button>
+          <button class="secondary-btn" @click="router.push('/products')">View Offers</button>
         </div>
       </div>
-      <div class="hero-decoration"></div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="features-section">
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🚀</div>
+          <h3>Instant Delivery</h3>
+          <p>Get your digital keys immediately after purchase.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🛡️</div>
+          <h3>Secure Payment</h3>
+          <p>100% secure transactions with top payment providers.</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💬</div>
+          <h3>24/7 Support</h3>
+          <p>Our team is here to help you anytime, anywhere.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="section-container">
+      <div class="section-header">
+        <h2>New Arrivals</h2>
+        <a href="/products" class="view-all">View All &rarr;</a>
+      </div>
+      <div class="games-grid">
+        <GameCard 
+          v-for="game in newArrivals" 
+          :key="game.id"
+          :id="game.id"
+          :name="game.name"
+          :genre="game.genre"
+          :price="game.price"
+          :image="game.image"
+          @add-to-cart="addToCart"
+        />
+      </div>
     </section>
 
     <!-- Promotions Section -->
@@ -20,17 +60,16 @@
           <h2>Winter Sale is Live!</h2>
           <p>Up to 50% off on top RPGs and Action games.</p>
         </div>
-        <button class="promo-btn">Browse Sale</button>
+        <button class="promo-btn" @click="router.push('/products')">Browse Sale</button>
       </div>
     </section>
 
-    <!-- Featured Games -->
+    <!-- Trending Games -->
     <section class="section-container">
       <div class="section-header">
         <h2>Trending Now</h2>
-        <a href="/products" class="view-all">View All Games &rarr;</a>
+        <a href="/products" class="view-all">View All &rarr;</a>
       </div>
-      
       <div class="games-grid">
         <GameCard 
           v-for="game in games" 
@@ -55,6 +94,7 @@ import api from '../services/api.js';
 
 const router = useRouter();
 const games = ref([]);
+const newArrivals = ref([]);
 const categories = ref([]);
 
 const fetchGames = async () => {
@@ -67,17 +107,20 @@ const fetchGames = async () => {
     categories.value = categoriesRes.data;
     const categoryMap = new Map(categories.value.map(c => [c.id, c.name]));
 
-    games.value = productsRes.data.map(product => ({
+    const allGames = productsRes.data.map(product => ({
       id: product.id,
       name: product.title,
       genre: categoryMap.get(product.category_id) || 'Unknown',
       price: product.price,
-      // Handle images: if array, take first; if string, use it; else placeholder
       image: Array.isArray(product.images) && product.images.length > 0 
         ? product.images[0] 
         : (typeof product.images === 'string' ? product.images : 'https://via.placeholder.com/300x200'),
-      description: product.description
+      description: product.description,
+      stock: product.stock
     }));
+
+    games.value = allGames.slice(0, 4);
+    newArrivals.value = allGames.slice(0, 4).reverse(); // Just simulation for now
   } catch (error) {
     console.error("Failed to fetch games:", error);
   }
@@ -85,7 +128,6 @@ const fetchGames = async () => {
 
 const addToCart = (id) => {
   console.log('Added to cart:', id);
-  // Ideally call a cart store/service here
 };
 
 onMounted(() => {
@@ -95,24 +137,22 @@ onMounted(() => {
 
 <style scoped>
 .home-page {
-  /* Using a dark gradient background for the whole page if needed, OR relies on global dark mode */
-  min-height: 100vh;
-  padding-bottom: 60px;
+  padding-bottom: 80px;
 }
 
 /* Hero Section */
 .hero-section {
   position: relative;
-  height: 80vh; /* Premium tall hero */
-  min-height: 500px;
+  height: 60vh;
+  min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&q=80&w=1600') center/cover no-repeat;
-  color: white;
-  margin-bottom: 40px;
-  border-bottom: 1px solid #333;
+  /* Light theme hero background */
+  background: linear-gradient(135deg, #eff6ff 0%, #f1f5f9 100%);
+  margin-bottom: 60px;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 .hero-content {
@@ -127,6 +167,7 @@ onMounted(() => {
   margin-bottom: 16px;
   line-height: 1.1;
   letter-spacing: -1px;
+  color: #1e293b;
 }
 
 .hero-title .highlight {
@@ -138,9 +179,9 @@ onMounted(() => {
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: #e2e8f0;
+  color: #64748b;
   margin-bottom: 32px;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .hero-buttons {
@@ -159,42 +200,76 @@ onMounted(() => {
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
 }
 
 .primary-btn:hover {
   transform: translateY(-2px);
   background: #2563eb;
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
 }
 
 .secondary-btn {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  color: white;
+  background: white;
+  color: #3b82f6;
   padding: 12px 32px;
   font-size: 1.1rem;
   font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 2px solid #3b82f6;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .secondary-btn:hover {
-  background: rgba(255,255,255,0.2);
+  background: #eff6ff;
   transform: translateY(-2px);
+}
+
+/* Features Section */
+.features-section {
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.feature-item {
+  padding: 20px;
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.feature-item h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.feature-item p {
+  color: #64748b;
+  line-height: 1.5;
 }
 
 /* Promotions Section */
 .promo-section {
   max-width: 1200px;
-  margin: 0 auto 60px;
+  margin: 0 auto 80px;
   padding: 0 20px;
 }
 
 .promo-banner {
-  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
   padding: 40px;
   border-radius: 20px;
   display: flex;
@@ -202,7 +277,7 @@ onMounted(() => {
   align-items: center;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
 }
 
 .promo-banner::before {
@@ -212,7 +287,7 @@ onMounted(() => {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -224,13 +299,13 @@ onMounted(() => {
 
 .promo-text p {
   font-size: 1.2rem;
-  color: #a5b4fc;
+  color: #ddd6fe;
   margin: 0;
 }
 
 .promo-btn {
   background: white;
-  color: #312e81;
+  color: #4f46e5;
   padding: 12px 24px;
   border-radius: 12px;
   font-weight: 700;
@@ -247,7 +322,7 @@ onMounted(() => {
 /* Featured Games Section */
 .section-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 80px;
   padding: 0 20px;
 }
 
@@ -255,13 +330,14 @@ onMounted(() => {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .section-header h2 {
   font-size: 2rem;
-  color: white; /* ensuring visibility */
+  color: #1e293b;
   margin: 0;
+  font-weight: 700;
 }
 
 .view-all {
@@ -272,13 +348,13 @@ onMounted(() => {
 }
 
 .view-all:hover {
-  color: #60a5fa;
+  color: #2563eb;
 }
 
 .games-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
 }
 
 /* Mobile Responsive */
