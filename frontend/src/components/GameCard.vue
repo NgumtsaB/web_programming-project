@@ -3,7 +3,7 @@
     <div class="image-container">
       <img :src="image" :alt="name" class="game-image" />
       <div class="overlay">
-        <button class="view-btn" @click="$emit('view-details', id)">Details</button>
+        <button class="view-btn" @click="console.log('Clicked GameCard ID:', id); $emit('view-details', id)">Details</button>
       </div>
     </div>
     <div class="card-content">
